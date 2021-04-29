@@ -254,7 +254,7 @@ class RDKitConstructor(Constructor):
         from rdkit import Chem
         from rdkit.Chem import rdChemReactions
 
-        scaffold_smiles = re.sub(r"\(\[R([0-9]+)]\)", r"([\1*])", scaffold.smiles)
+        scaffold_smiles = re.sub(r"\(([\\/]*)\[R([0-9]+)]\)", r"(\1[\2*])", scaffold.smiles)
         reactant = (Chem.MolFromSmiles(scaffold_smiles),)
 
         for i in substituents:
@@ -376,7 +376,7 @@ class OpenEyeConstructor(Constructor):  # pragma: no cover
 
         from openeye import oechem
 
-        scaffold_smiles = re.sub(r"\(\[R([0-9]+)]\)", r"([\1*])", scaffold.smiles)
+        scaffold_smiles = re.sub(r"\(([\\/]*)\[R([0-9]+)]\)", r"(\1[\2*])", scaffold.smiles)
 
         reactant = oechem.OEMol()
         oechem.OESmilesToMol(reactant, scaffold_smiles)
